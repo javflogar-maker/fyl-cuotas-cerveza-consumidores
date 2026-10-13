@@ -54,6 +54,48 @@
    @media(max-width:720px){.mast{height:auto;align-items:center}.brand-logo{width:205px;max-height:61px}.hero{background-position:center,66% center}}
    @media print{.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}.brand-logo{width:230px}.badge{border:1px solid #C51A29}thead th{background:#2D2C2F!important;color:#FFF!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
   </style>
+
+  <style id="fylDashboardProStyles">
+    /* Ajustes profesionales – escritorio prioritario */
+    .hero p{max-width:840px;font-size:13px;line-height:1.6;color:#EFE9E9}
+    .hero p strong{font-weight:800;color:#FFFFFF}
+    .toolbar{justify-content:flex-end;gap:0;margin:20px 0 16px}
+    .toolbar .actions{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:9px;width:100%}
+    .toolbar .btn{white-space:nowrap;flex:0 0 auto}
+    #cityBars .progress-row{margin:12px 0}
+    #cityBars .bar span[style*="width:0%"]{min-width:0}
+    .profile-card{padding:15px 0 17px;border-bottom:1px solid var(--line)}
+    .profile-card:first-child{padding-top:3px}
+    .profile-card:last-child{border-bottom:0;padding-bottom:4px}
+    .profile-title{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .profile-title strong{font-size:13px;color:#30292B}
+    .profile-title .rate{font-size:16px;font-weight:850;color:#B91C2A;white-space:nowrap}
+    .profile-summary{font-size:11px;color:#77787E;margin-top:5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .profile-summary b{font-size:12px;color:#343035;font-weight:850}
+    .profile-summary .remaining b{color:#B71928}
+    .profile-track{height:9px;border-radius:20px;background:#EEE9E9;overflow:hidden;margin-top:11px}
+    .profile-track span{display:block;min-width:0;height:100%;border-radius:20px}
+    .profile-hint{font-size:10px;color:#8E878A;margin-top:6px}
+    .panel-head{align-items:flex-start}
+    .alert[hidden]{display:none!important}
+    @media(max-width:960px){.toolbar .actions{flex-wrap:wrap}}
+    /* Detalle visible sobre la tabla, con filtros sincronizados */
+    #cityDetailSection{margin-top:0;margin-bottom:15px;scroll-margin-top:16px}
+    #cityDetailSection .details-controls-line{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    #cityDetailSection .details-head{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+    #cityDetailSection .table-controls{display:flex;flex-wrap:nowrap;align-items:center;gap:9px}
+    #cityDetailSection .detail-cards{margin-top:18px}
+    #cityDetailSection .input{width:200px}
+    #cityDetailSection .select{max-width:none;min-width:165px}
+    #cityQuotaTable tbody tr[data-city-row]{cursor:pointer}
+    #cityQuotaTable tbody tr[data-city-row]:focus-visible{outline:3px solid #C51A29;outline-offset:-3px}
+    #cityQuotaTable tbody tr.active{background:#FFF0F1;box-shadow:inset 4px 0 0 #C51A29}
+    #cityQuotaTable #selectedHint{color:#B91C2A;font-weight:800}
+    #cityDetailSection .detail-empty{grid-column:1/-1;margin:8px 0;color:#7B7376;font-size:13px}
+    @media(max-width:840px){#cityDetailSection .details-controls-line{align-items:flex-start}#cityDetailSection .table-controls{width:100%}}
+    @media(max-width:580px){#cityDetailSection .table-controls{flex-wrap:wrap}#cityDetailSection .input,#cityDetailSection .select{width:100%;max-width:none}}
+    @media print{#cityDetailSection .table-controls{display:none}#cityQuotaTable tbody tr.active{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+  </style>
 </head>
 <body>
 <div class="shell" id="app">
@@ -62,38 +104,44 @@
     <div class="mast-right"><span class="mast-small">PROYECTO 2644 · LMI15</span><span class="badge"><i class="dot"></i> <span id="viewLabel">SEGUIMIENTO DE CAMPO</span></span></div>
   </header>
   <section class="hero">
-    <div><div class="overline">F2F CERVEZA · CONSUMIDORES</div><h1>Control de cuotas</h1><p>Monitoreo ejecutivo de avance, cumplimiento y entrevistas pendientes por plaza y tipo de consumidor.</p></div>
+    <div><div class="overline">F2F CERVEZA · CONSUMIDORES</div><h1>Control de cuotas</h1><p><strong>Panel interactivo de seguimiento</strong> · Consulta por ciudad y segmento. Los datos corresponden al corte indicado; no son en tiempo real.</p></div>
     <div class="hero-meta"><span>CORTE DE INFORMACIÓN</span><b id="cut">Captura inicial</b><span class="hero-tag">ALCHEMER · SURVEY QUOTAS</span></div>
   </section>
-  <div class="toolbar"><div class="toolbar-intro"><strong>Panel interactivo de seguimiento</strong> · Consulta por ciudad y segmento. Los datos corresponden al corte indicado; no son en tiempo real.</div>
+  <div class="toolbar">
     <div class="actions"><button class="btn btn-share" type="button" id="saveHtmlButton" title="Descargar el tablero actualizado como index.html para publicarlo en GitHub Pages">⤓ &nbsp;Guardar HTML actualizado</button><button class="btn" type="button" id="csvButton"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3h14v-3"/></svg> Exportar CSV</button><button class="btn" id="printButton" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V3h12v6M6 18H4V9h16v9h-2M6 14h12v7H6z"/></svg> Imprimir / PDF</button><button class="btn btn-primary" id="uploadButton" type="button" title="Cargar archivo de actualización de cuotas preparado a partir de una captura de Alchemer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21V9m-4 4 4-4 4 4M4 6V3h16v3"/></svg> Cargar actualización</button><input type="file" accept=".json,application/json" class="fileinput" id="fileInput" aria-label="Seleccionar archivo de actualización JSON" /></div>
   </div>
   <section class="metrics" aria-label="Indicadores clave">
     <article class="metric emphasis"><div class="eyebrow">ENTREVISTAS COMPLETADAS <span>↗</span></div><div class="number" id="kpiDone">47 <span>/ 873</span></div><div class="foot">Cuota general reportada</div><div class="main-progress"><i id="generalBar" style="width:5.4%"></i></div></article>
     <article class="metric"><div class="eyebrow">PENDIENTES DE LEVANTAR</div><div class="number" id="kpiLeft">826</div><div class="foot">Entrevistas para cubrir la meta</div></article>
     <article class="metric"><div class="eyebrow">CUMPLIMIENTO GLOBAL</div><div class="number numgreen" id="kpiRate">5.4%</div><div class="foot">De la muestra programada</div></article>
-    <article class="metric"><div class="eyebrow">PLAZAS CON DATOS VISIBLES</div><div class="number" id="kpiCities">4 <span>/ 17</span></div><div class="foot" id="kpiCoverage">13 plazas sin captura disponible</div></article>
+    <article class="metric"><div class="eyebrow">CIUDADES MONITOREADAS</div><div class="number" id="kpiCities">4 <span>/ 17</span></div><div class="foot" id="kpiCoverage">13 plazas sin captura disponible</div></article>
   </section>
-  <div class="section-title"><div><h2>Lectura ejecutiva</h2><p>Avance por plaza y composición de la cuota programada</p></div><span class="info-small">Actualización sujeta a las capturas disponibles</span></div>
+  <div class="section-title"><div><h2>Lectura ejecutiva</h2><p>Entrevistas completadas y pendientes por ciudad y perfil de consumo</p></div><span class="info-small">Actualización sujeta a las capturas disponibles</span></div>
   <section class="panels">
-    <div class="panel"><div class="panel-head"><h3>Ciudades con avance verificado</h3><span class="smalllabel">Avance por plaza</span></div><div id="cityBars"></div><div class="summary-note" id="coverageNote"></div></div>
-    <div class="panel"><div class="panel-head"><h3>Composición de la muestra objetivo</h3><span class="smalllabel">Total: 873</span></div><div class="quota-list" id="quotaComposition"></div><div class="legendchips"><span><b style="background:#C51A29"></b>Reales</span><span><b style="background:#62646B"></b>Potenciales</span><span><b style="background:#D88C94"></b>No consumidores</span></div></div>
+    <div class="panel"><div class="panel-head"><h3>Avance por ciudad</h3><span class="smalllabel">Cumplimiento de cuota por ciudad</span></div><div id="cityBars"></div></div>
+    <div class="panel"><div class="panel-head"><h3>Avance por perfil</h3><span class="smalllabel" id="profileGrandTotal">47 / 873 entrevistas</span></div><div class="quota-list" id="quotaComposition"></div></div>
   </section>
   <div class="alert" id="alertBox"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#bd8e3f" stroke-width="1.8"><path d="m12 3 10 18H2L12 3zM12 9v5m0 3v2"/></svg><div id="alertMessage"></div></div>
-  <div class="section-title"><div><h2>Matriz de cuotas por plaza</h2><p>Selecciona una ciudad para consultar el detalle de los tres segmentos</p></div></div>
-  <section class="table-panel"><div class="table-toolbar"><div><h3>17 plazas · 873 entrevistas objetivo</h3><small>Las celdas «—» indican datos no visibles en la última captura; no representan cero.</small></div><div class="table-controls"><input class="input" id="searchCity" type="search" placeholder="Buscar ciudad..." aria-label="Buscar ciudad"/><select class="select" id="filterCity" aria-label="Filtrar ciudades"><option value="all">Todas las plazas</option><option value="known">Con avance reportado</option><option value="unknown">Sin datos visibles</option></select></div></div>
-    <div class="table-wrap"><table><thead><tr><th>Plaza</th><th>Meta reales</th><th>Meta potenciales</th><th>Meta no consumidores</th><th>Meta total</th><th>Avance</th><th>Faltan</th><th>Cumplimiento</th><th>Estatus</th></tr></thead><tbody id="tableBody"></tbody></table></div>
-    <div class="table-footer"><span id="tableCount">17 plazas</span><span>Fuente: Alchemer / Tools → Quotas · cifras sujetas a validación</span></div>
+  <div class="section-title"><div><h2>Matriz de cuotas por plaza</h2><p>Busca o selecciona una ciudad para visualizar el avance de sus tres segmentos</p></div></div>
+  <section class="details" id="cityDetailSection" aria-live="polite" aria-label="Detalle por ciudad seleccionada">
+    <div class="details-controls-line">
+      <div class="details-head"><h3 id="selectedCity">Detalle de CDMX</h3><span id="selectedSum">Meta ciudad: 173 entrevistas</span></div>
+      <div class="table-controls"><input class="input" id="searchCity" type="search" placeholder="Buscar ciudad..." aria-label="Buscar ciudad"/><select class="select" id="filterCity" aria-label="Filtrar ciudades"><option value="all">Todas las plazas</option><option value="known">Con avance reportado</option><option value="unknown">Sin datos visibles</option></select></div>
+    </div>
+    <div class="detail-cards" id="detailCards"></div><div id="detailNote" class="detail-note" hidden></div>
   </section>
-  <section class="details" aria-live="polite"><div class="details-head"><h3 id="selectedCity">Detalle de CDMX</h3><span id="selectedSum">Meta ciudad: 173 entrevistas</span></div><div class="detail-cards" id="detailCards"></div><div id="detailNote" class="detail-note" hidden></div></section>
+  <section class="table-panel" id="cityQuotaTable"><div class="table-toolbar"><div><h3>17 plazas · 873 entrevistas objetivo</h3><small>Haz clic en cualquier fila para consultar su detalle. Las cifras corresponden al último corte validado de Alchemer.</small></div><span class="smalllabel" id="selectedHint">Ciudad seleccionada: CDMX</span></div>
+    <div class="table-wrap"><table><thead><tr><th>Plaza</th><th>Meta reales</th><th>Meta potenciales</th><th>Meta no consumidores</th><th>Meta total</th><th>Avance</th><th>Faltan</th><th>Cumplimiento</th><th>Estatus</th></tr></thead><tbody id="tableBody"></tbody></table></div>
+    <div class="table-footer"><span id="tableCount">17 plazas</span><span>Fuente: Alchemer / Tools → Quotas · corte indicado</span></div>
+  </section>
   <footer class="footer"><span><b>FyL Research</b> · Control de cuotas · Información agregada de campo</span><span>Fuente: Alchemer / capturas del corte · Interacción local en navegador · El archivo no se sincroniza con Alchemer.</span></footer>
 </div>
-<script id="fylSharedSnapshot" type="application/json">{"data":{"cut":"12 oct 2026 · Captura inicial","overall":47,"cities":{"CDMX":{"total":35,"real":20,"potential":11,"non":3},"Monterrey":{"total":2,"real":2,"potential":0,"non":0},"Guadalajara":{"total":2,"real":2,"potential":0,"non":0},"Tijuana":{"total":3,"real":3,"potential":0,"non":0}}}}</script>
+<script id="fylSharedSnapshot" type="application/json">{"data":{"cut":"12 oct 2026 · Corte validado","overall":47,"cities":{"CDMX":{"total":34,"real":20,"potential":11,"non":3},"Monterrey":{"total":2,"real":2,"potential":0,"non":0},"Guadalajara":{"total":2,"real":2,"potential":0,"non":0},"Tijuana":{"total":3,"real":3,"potential":0,"non":0},"Toluca":{"total":0,"real":0,"potential":0,"non":0},"Puebla":{"total":0,"real":0,"potential":0,"non":0},"Mérida":{"total":2,"real":2,"potential":0,"non":0},"Cancún":{"total":1,"real":1,"potential":0,"non":0},"Veracruz":{"total":2,"real":2,"potential":0,"non":0},"Culiacán":{"total":0,"real":0,"potential":0,"non":0},"Hermosillo":{"total":0,"real":0,"potential":0,"non":0},"Chihuahua":{"total":0,"real":0,"potential":0,"non":0},"Saltillo":{"total":0,"real":0,"potential":0,"non":0},"León":{"total":0,"real":0,"potential":0,"non":0},"Querétaro":{"total":0,"real":0,"potential":0,"non":0},"SLP":{"total":0,"real":0,"potential":0,"non":0},"Pachuca":{"total":1,"real":1,"potential":0,"non":0}}}}</script>
 <script>
 (()=>{
   'use strict';
   const PLAN=[{"name": "CDMX", "real": 90, "potential": 50, "non": 33}, {"name": "Monterrey", "real": 50, "potential": 30, "non": 15}, {"name": "Guadalajara", "real": 45, "potential": 20, "non": 11}, {"name": "Tijuana", "real": 40, "potential": 20, "non": 10}, {"name": "Toluca", "real": 35, "potential": 17, "non": 9}, {"name": "Puebla", "real": 30, "potential": 15, "non": 8}, {"name": "Mérida", "real": 30, "potential": 15, "non": 8}, {"name": "Cancún", "real": 20, "potential": 11, "non": 6}, {"name": "Veracruz", "real": 20, "potential": 11, "non": 5}, {"name": "Culiacán", "real": 20, "potential": 10, "non": 5}, {"name": "Hermosillo", "real": 20, "potential": 10, "non": 5}, {"name": "Chihuahua", "real": 20, "potential": 5, "non": 3}, {"name": "Saltillo", "real": 20, "potential": 5, "non": 2}, {"name": "León", "real": 15, "potential": 10, "non": 4}, {"name": "Querétaro", "real": 15, "potential": 10, "non": 3}, {"name": "SLP", "real": 10, "potential": 8, "non": 2}, {"name": "Pachuca", "real": 10, "potential": 5, "non": 2}];
-  const INITIAL={"cut": "12 oct 2026 · Captura inicial", "overall": 47, "cities": {"CDMX": {"total": 35, "real": 20, "potential": 11, "non": 3}, "Monterrey": {"total": 2, "real": 2, "potential": 0, "non": 0}, "Guadalajara": {"total": 2, "real": 2, "potential": 0, "non": 0}, "Tijuana": {"total": 3, "real": 3, "potential": 0, "non": 0}}};
+  const INITIAL={"cut":"12 oct 2026 · Corte validado","overall":47,"cities":{"CDMX":{"total":34,"real":20,"potential":11,"non":3},"Monterrey":{"total":2,"real":2,"potential":0,"non":0},"Guadalajara":{"total":2,"real":2,"potential":0,"non":0},"Tijuana":{"total":3,"real":3,"potential":0,"non":0},"Toluca":{"total":0,"real":0,"potential":0,"non":0},"Puebla":{"total":0,"real":0,"potential":0,"non":0},"Mérida":{"total":2,"real":2,"potential":0,"non":0},"Cancún":{"total":1,"real":1,"potential":0,"non":0},"Veracruz":{"total":2,"real":2,"potential":0,"non":0},"Culiacán":{"total":0,"real":0,"potential":0,"non":0},"Hermosillo":{"total":0,"real":0,"potential":0,"non":0},"Chihuahua":{"total":0,"real":0,"potential":0,"non":0},"Saltillo":{"total":0,"real":0,"potential":0,"non":0},"León":{"total":0,"real":0,"potential":0,"non":0},"Querétaro":{"total":0,"real":0,"potential":0,"non":0},"SLP":{"total":0,"real":0,"potential":0,"non":0},"Pachuca":{"total":1,"real":1,"potential":0,"non":0}}};
   
   let shared=null;
   try { const e=document.getElementById('fylSharedSnapshot'); const s=e&&e.textContent.trim(); if(s&&s!=='{}') shared=JSON.parse(s); }catch(e){console.warn('No se pudo leer la instantánea del corte compartido.');}
@@ -112,6 +160,28 @@
   const names={real:'Consumidores reales',potential:'Consumidores potenciales',non:'No consumidores'};
   function knownCities(){return PLAN.filter(p=>Object.prototype.hasOwnProperty.call(state.data.cities,p.name)&&safe(state.data.cities[p.name].total));}
   function snapshotCity(city){return state.data.cities[city]||null;}
+  function visibleRows(){
+    const search=get('searchCity').value.trim().toLocaleLowerCase('es');
+    const filter=get('filterCity').value;
+    return PLAN.filter(p=>p.name.toLocaleLowerCase('es').includes(search) &&
+      (filter==='all'||(filter==='known'&&snapshotCity(p.name)!==null)||(filter==='unknown'&&snapshotCity(p.name)===null)));
+  }
+  function syncSelectedCity(preferFirstMatch=false){
+    const rows=visibleRows();
+    if(!rows.length){state.selected=null;return;}
+    if(preferFirstMatch||!rows.some(p=>p.name===state.selected)){
+      const search=get('searchCity').value.trim().toLocaleLowerCase('es');
+      const exact=rows.find(p=>p.name.toLocaleLowerCase('es')===search);
+      state.selected=(exact||rows[0]).name;
+    }
+  }
+  function selectCity(city){
+    if(!PLAN.some(p=>p.name===city))return;
+    state.selected=city;
+    renderTable();renderDetails();
+    const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    get('cityDetailSection').scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
+  }
   function render(){
     const d=state.data;
     get('cut').textContent=d.cut||'Captura disponible';
@@ -126,33 +196,58 @@
       const val=snapshotCity(p.name).total;const max=planTotal(p);
       return '<div class="progress-row"><div class="city-name">'+escapeHtml(p.name)+'<small>'+nq(val)+' de '+nq(max)+' entrevistas</small></div><div class="bar"><span style="width:'+Math.min(100,val/max*100)+'%"></span></div><div class="barval">'+pct(val,max)+'<small>'+nq(max-val)+' pendientes</small></div></div>';
     }).join('')||'<p style="color:#8795a4">Sin ciudades con avance reportado.</p>';
-    const visibleSum=kc.reduce((a,p)=>a+snapshotCity(p.name).total,0);
-    const unallocated=d.overall-visibleSum;
-    get('coverageNote').innerHTML='De las <strong>'+nq(d.overall)+'</strong> entrevistas del total general, <strong>'+nq(visibleSum)+'</strong> aparecen desglosadas en las '+kc.length+' ciudades visibles. '+(unallocated>=0?'<strong>'+nq(unallocated)+'</strong> no pueden asignarse a una plaza a partir de esta(s) captura(s).':'Los totales de ciudades exceden la cifra general; revisar cortes distintos.');
     const categories=[['real','Consumidores reales'],['potential','Consumidores potenciales'],['non','No consumidores']];
-    get('quotaComposition').innerHTML=categories.map(([key,title])=>{const quantity=PLAN.reduce((a,p)=>a+p[key],0);return '<div class="quota-line"><div><strong>'+title+'</strong><br><small>'+pct(quantity,meta)+' de la muestra total</small></div><div class="qnum">'+nq(quantity)+'</div><div class="linebar"><i style="background:'+color[key]+';width:'+(quantity/meta*100)+'%"></i></div></div>';}).join('');
+    const complete=kc.length===PLAN.length&&kc.every(p=>['real','potential','non'].every(k=>safe(snapshotCity(p.name)[k])));
+    get('profileGrandTotal').textContent=nq(d.overall)+' / '+nq(meta)+' entrevistas';
+    get('quotaComposition').innerHTML=categories.map(([key,title])=>{
+      const goal=PLAN.reduce((a,p)=>a+p[key],0);
+      const observed=kc.reduce((a,p)=>a+(safe(snapshotCity(p.name)[key])?snapshotCity(p.name)[key]:0),0);
+      const done=complete?observed:null;
+      const pending=done===null?null:Math.max(0,goal-done);
+      const progress=done===null?0:Math.min(100,done/goal*100);
+      return '<div class="profile-card"><div class="profile-title"><strong>'+title+'</strong><span class="rate">'+(done===null?'N/D':pct(done,goal))+'</span></div>'+
+      '<div class="profile-summary"><span>Meta: <b>'+nq(goal)+'</b></span><span>Avance: <b>'+(done===null?'N/D':nq(done))+'</b></span><span class="remaining">Faltan: <b>'+(pending===null?'N/D':nq(pending))+'</b></span></div>'+
+      '<div class="profile-track"><span style="background:'+color[key]+';width:'+progress+'%"></span></div>'+
+      (complete?'':'<div class="profile-hint">Pendiente de validar todas las ciudades para el total nacional.</div>')+'</div>';
+    }).join('');
+    // Validación automática de ciudad y conciliación del total nacional.
     const discrepancies=kc.filter(p=>{const v=snapshotCity(p.name);return ['real','potential','non'].every(k=>safe(v[k]))&&(v.real+v.potential+v.non!==v.total);});
-    let message='La suma de subcuotas no siempre coincide con el total de la ciudad. '; 
-    message+=discrepancies.length?'<strong>Revisar '+discrepancies.map(p=>escapeHtml(p.name)+' ('+(snapshotCity(p.name).total-[snapshotCity(p.name).real,snapshotCity(p.name).potential,snapshotCity(p.name).non].reduce((a,b)=>a+b,0)>0?'+':'')+(snapshotCity(p.name).total-[snapshotCity(p.name).real,snapshotCity(p.name).potential,snapshotCity(p.name).non].reduce((a,b)=>a+b,0))+')').join(', ')+'</strong>. ':'No se identifican diferencias en las ciudades con desglose completo. ';
-    message+='Se respetan los conteos tal como se ven en Alchemer; no se corrigen ni asignan entrevistas por suposición.';
-    get('alertMessage').innerHTML=message;
-    renderTable();renderDetails();
+    const warnings=[];
+    if(discrepancies.length){warnings.push('Diferencia entre total y suma de perfiles en <strong>'+discrepancies.map(p=>{
+      const v=snapshotCity(p.name),delta=v.total-v.real-v.potential-v.non;
+      return escapeHtml(p.name)+' ('+(delta>0?'+':'')+delta+')';
+    }).join(', ')+'</strong>.');}
+    if(kc.length===PLAN.length){
+      const cityTotal=kc.reduce((a,p)=>a+snapshotCity(p.name).total,0);
+      if(cityTotal!==d.overall){warnings.push('El total general ('+nq(d.overall)+') difiere de la suma por ciudades ('+nq(cityTotal)+').');}
+    }
+    const quality=get('alertBox');
+    quality.hidden=warnings.length===0;
+    get('alertMessage').innerHTML=warnings.join(' ')+' Se presentan los datos originales de Alchemer para su revisión.';
+    syncSelectedCity();renderTable();renderDetails();
   }
   function renderTable(){
-    const search=get('searchCity').value.trim().toLocaleLowerCase('es');
-    const filter=get('filterCity').value;
-    const rows=PLAN.filter(p=>p.name.toLocaleLowerCase('es').includes(search)&&(filter==='all'||(filter==='known'&&snapshotCity(p.name)!==null)||(filter==='unknown'&&snapshotCity(p.name)===null)));
+    const rows=visibleRows();
     get('tableBody').innerHTML=rows.map(p=>{
       const d=snapshotCity(p.name),goal=planTotal(p),has=d!==null&&safe(d.total),rate=has?pct(d.total,goal):'—',missing=has?nq(Math.max(0,goal-d.total)):'—';
       const mismatch=has&&['real','potential','non'].every(k=>safe(d[k]))&&d.real+d.potential+d.non!==d.total;
       const tag=!has?'<span class="status missing">SIN DATO</span>':mismatch?'<span class="status warn">REVISAR</span>':'<span class="status good">REGISTRADO</span>';
-      return '<tr class="'+(state.selected===p.name?'active':'')+'"><td class="tdcity"><button type="button" class="citylink" data-city="'+escapeHtml(p.name)+'">'+escapeHtml(p.name)+'</button></td><td>'+nq(p.real)+'</td><td>'+nq(p.potential)+'</td><td>'+nq(p.non)+'</td><td class="tdbold">'+nq(goal)+'</td><td class="tdbold">'+(has?nq(d.total):'<span class="muted">—</span>')+'</td><td>'+missing+'</td><td>'+(has?'<div class="mini-track"><div class="bar"><span style="width:'+Math.min(100,d.total/goal*100)+'%"></span></div><em>'+rate+'</em></div>':'<span class="muted">—</span>')+'</td><td>'+tag+'</td></tr>';
+      return '<tr class="'+(state.selected===p.name?'active':'')+'" data-city-row="'+escapeHtml(p.name)+'" tabindex="0" aria-selected="'+(state.selected===p.name?'true':'false')+'" title="Ver el detalle de '+escapeHtml(p.name)+'"><td class="tdcity"><button type="button" class="citylink" data-city="'+escapeHtml(p.name)+'">'+escapeHtml(p.name)+'</button></td><td>'+nq(p.real)+'</td><td>'+nq(p.potential)+'</td><td>'+nq(p.non)+'</td><td class="tdbold">'+nq(goal)+'</td><td class="tdbold">'+(has?nq(d.total):'<span class="muted">—</span>')+'</td><td>'+missing+'</td><td>'+(has?'<div class="mini-track"><div class="bar"><span style="width:'+Math.min(100,d.total/goal*100)+'%"></span></div><em>'+rate+'</em></div>':'<span class="muted">—</span>')+'</td><td>'+tag+'</td></tr>';
     }).join('')||'<tr><td colspan="9" style="padding:24px;text-align:center;color:#8996a4">No se encontraron ciudades para ese filtro.</td></tr>';
     get('tableCount').textContent=rows.length+' de '+PLAN.length+' plazas mostradas';
-    get('tableBody').querySelectorAll('[data-city]').forEach(b=>b.addEventListener('click',()=>{state.selected=b.dataset.city;renderTable();renderDetails();}));
+    get('selectedHint').textContent=state.selected?'Ciudad seleccionada: '+state.selected:'Sin ciudad seleccionada';
   }
   function renderDetails(){
-    const p=PLAN.find(p=>p.name===state.selected)||PLAN[0], d=snapshotCity(p.name);
+    const p=PLAN.find(p=>p.name===state.selected);
+    if(!p){
+      get('selectedCity').textContent='No se encontraron coincidencias';
+      get('selectedSum').textContent='Modifica la búsqueda o el filtro de ciudad';
+      get('detailCards').innerHTML='<p class="detail-empty">No hay ciudades que coincidan con los filtros aplicados.</p>';
+      get('detailNote').hidden=true;
+      get('detailNote').textContent='';
+      return;
+    }
+    const d=snapshotCity(p.name);
     get('selectedCity').textContent='Detalle de '+p.name;
     get('selectedSum').textContent='Meta ciudad: '+nq(planTotal(p))+' entrevistas';
     get('detailCards').innerHTML=['real','potential','non'].map(k=>{
@@ -205,13 +300,32 @@
   get('uploadButton').addEventListener('click',()=>get('fileInput').click());
   get('fileInput').addEventListener('change',async event=>{
     const file=event.target.files[0];if(!file)return;
-    try{if(file.size>1024*1024)throw Error('El archivo excede 1 MB.');const content=JSON.parse(await file.text());const next=cleanUpdate(content);state.data=next;render();alert('Corte cargado en esta sesión. Para conservarlo en el archivo de OneDrive, utiliza «Guardar HTML actualizado» y sustituye el archivo compartido.');}
+    try{if(file.size>1024*1024)throw Error('El archivo excede 1 MB.');const content=JSON.parse(await file.text());const next=cleanUpdate(content);state.data=next;render();alert('Corte cargado para revisión. Para publicarlo y actualizar el tablero del cliente, sustituye actualizacion_cuotas.json en el repositorio de GitHub.');}
     catch(err){alert('No se pudo importar: '+(err.message||'Error de formato'));}
     event.target.value='';
   });
-  get('searchCity').addEventListener('input',renderTable);get('filterCity').addEventListener('change',renderTable);
+  // La búsqueda actualiza el detalle al escribir; el clic en cualquier fila lo actualiza y lo muestra arriba.
+  get('searchCity').addEventListener('input',()=>{syncSelectedCity(true);renderTable();renderDetails();});
+  get('filterCity').addEventListener('change',()=>{syncSelectedCity();renderTable();renderDetails();});
+  get('tableBody').addEventListener('click',event=>{
+    const row=event.target.closest('tr[data-city-row]');
+    if(row&&get('tableBody').contains(row))selectCity(row.dataset.cityRow);
+  });
+  get('tableBody').addEventListener('keydown',event=>{
+    if(event.target.matches('tr[data-city-row]')&&(event.key==='Enter'||event.key===' ')){
+      event.preventDefault();selectCity(event.target.dataset.cityRow);
+    }
+  });
   get('csvButton').addEventListener('click',csvExport);get('printButton').addEventListener('click',()=>window.print());
   render();
+  // En GitHub Pages, los visitantes reciben la última actualización JSON
+  // sin necesidad de reemplazar index.html ni acceso a la API de Alchemer.
+  if(location.protocol==='http:'||location.protocol==='https:'){
+    fetch('./actualizacion_cuotas.json',{cache:'no-store'})
+      .then(response=>{if(!response.ok)throw Error('JSON no publicado ('+response.status+')');return response.json();})
+      .then(payload=>{state.data=cleanUpdate(payload);render();})
+      .catch(error=>console.info('Se muestra el último corte incluido en index.html:',error.message));
+  }
 })();
 </script>
 </body>

@@ -1,0 +1,108 @@
+{
+  "cut": "12 oct 2026 · Corte validado",
+  "overall": 47,
+  "cities": {
+    "CDMX": {
+      "total": 34,
+      "real": 20,
+      "potential": 11,
+      "non": 3
+    },
+    "Monterrey": {
+      "total": 2,
+      "real": 2,
+      "potential": 0,
+      "non": 0
+    },
+    "Guadalajara": {
+      "total": 2,
+      "real": 2,
+      "potential": 0,
+      "non": 0
+    },
+    "Tijuana": {
+      "total": 3,
+      "real": 3,
+      "potential": 0,
+      "non": 0
+    },
+    "Toluca": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "Puebla": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "Mérida": {
+      "total": 2,
+      "real": 2,
+      "potential": 0,
+      "non": 0
+    },
+    "Cancún": {
+      "total": 1,
+      "real": 1,
+      "potential": 0,
+      "non": 0
+    },
+    "Veracruz": {
+      "total": 2,
+      "real": 2,
+      "potential": 0,
+      "non": 0
+    },
+    "Culiacán": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "Hermosillo": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "Chihuahua": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "Saltillo": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "León": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "Querétaro": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "SLP": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "Pachuca": {
+      "total": 1,
+      "real": 1,
+      "potential": 0,
+      "non": 0
+    }
+  }
+}
