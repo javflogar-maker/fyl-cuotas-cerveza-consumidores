@@ -1,58 +1,58 @@
 {
-  "cut": "12 oct 2026 · Corte validado",
-  "overall": 47,
+  "cut": "13 oct 2026 · Solo entrevistas efectivas (pruebas excluidas)",
+  "overall": 125,
   "cities": {
     "CDMX": {
-      "total": 34,
-      "real": 20,
-      "potential": 11,
-      "non": 3
+      "total": 61,
+      "real": 30,
+      "potential": 20,
+      "non": 11
     },
     "Monterrey": {
-      "total": 2,
-      "real": 2,
-      "potential": 0,
-      "non": 0
+      "total": 26,
+      "real": 16,
+      "potential": 6,
+      "non": 4
     },
     "Guadalajara": {
-      "total": 2,
-      "real": 2,
-      "potential": 0,
-      "non": 0
-    },
-    "Tijuana": {
-      "total": 3,
-      "real": 3,
-      "potential": 0,
-      "non": 0
-    },
-    "Toluca": {
-      "total": 0,
-      "real": 0,
-      "potential": 0,
-      "non": 0
-    },
-    "Puebla": {
-      "total": 0,
-      "real": 0,
-      "potential": 0,
-      "non": 0
-    },
-    "Mérida": {
-      "total": 2,
-      "real": 2,
-      "potential": 0,
-      "non": 0
-    },
-    "Cancún": {
       "total": 1,
       "real": 1,
       "potential": 0,
       "non": 0
     },
+    "Tijuana": {
+      "total": 10,
+      "real": 7,
+      "potential": 2,
+      "non": 1
+    },
+    "Toluca": {
+      "total": 4,
+      "real": 3,
+      "potential": 0,
+      "non": 1
+    },
+    "Puebla": {
+      "total": 5,
+      "real": 4,
+      "potential": 1,
+      "non": 0
+    },
+    "Mérida": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
+    "Cancún": {
+      "total": 0,
+      "real": 0,
+      "potential": 0,
+      "non": 0
+    },
     "Veracruz": {
-      "total": 2,
-      "real": 2,
+      "total": 0,
+      "real": 0,
       "potential": 0,
       "non": 0
     },
@@ -69,10 +69,10 @@
       "non": 0
     },
     "Chihuahua": {
-      "total": 0,
-      "real": 0,
-      "potential": 0,
-      "non": 0
+      "total": 14,
+      "real": 8,
+      "potential": 5,
+      "non": 1
     },
     "Saltillo": {
       "total": 0,
@@ -99,10 +99,11 @@
       "non": 0
     },
     "Pachuca": {
-      "total": 1,
-      "real": 1,
-      "potential": 0,
+      "total": 4,
+      "real": 2,
+      "potential": 2,
       "non": 0
     }
   }
+}
 }
